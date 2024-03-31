@@ -1,0 +1,27 @@
+.btn {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.btn__text--red {
+  color: #e74c3c;
+  font-weight: bold;
+  text-shadow: 0 .5px 1.2px #000;
+}
+
+.btn--rotate {
+  transform: rotate(180deg);
+}
+
+.btn--dark_grey {
+  background-color: #bfbfbf;
+}
+
+.btn--light_grey {
+  background-color: #e6e6e6
+}
+
+.btn--blue {
+  background-color: #008fb3;
+  color: white;
+}
