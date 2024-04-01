@@ -1,17 +1,16 @@
 .btn {
   font-size: 2rem;
   cursor: pointer;
-  border: var(--borderButtons);
-  padding: .5rem 0;
-  border-radius: 5rem;
-}
-
-.btn {
+  padding: 0.5rem 0;
+  border: none;
+  border-radius: 12px;
+  color: var(--textColor);
   outline: none;
 }
 
 .btn:hover {
   filter: brightness(var(--brightnessButton));
+  transition: all 0.2s ease;
 }
 
 .btn--blue:hover {
@@ -19,7 +18,7 @@
 }
 
 .btn__text--red {
-  color: #e74c3c;
+  color: var(--redButton);
   font-weight: bold;
 }
 
@@ -33,10 +32,10 @@
 }
 
 .btn--light {
-  background-color: var(--backgroundColorLight)
+  background-color: var(--backgroundColorLight);
 }
 
 .btn--blue {
-  background-color: #008fb3;
+  background-color: #107f9b;
   color: white;
 }

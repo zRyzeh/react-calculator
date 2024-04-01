@@ -1,9 +1,11 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
 
-h1, p {
+h1,
+p {
   margin: 0;
 }
 
@@ -16,11 +18,15 @@ h1, p {
 }
 
 .calculator {
-  border: var(--borderCalculator);
   border-radius: 1rem;
-  padding: .6rem;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
   width: 90%;
-  max-width: 500px
+  max-width: 350px;
+  background-color: var(--bgCalc);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  box-shadow: 0px 0px 30px 0px #186477;
 }
 
 .calculator__display {
@@ -28,56 +34,79 @@ h1, p {
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
-  margin: 0 .4rem;
   padding-right: 1rem;
   border: var(--borderCalculator);
-  margin-bottom: .5rem;
+  background: var(--bgDisplayCalc);
   height: 6rem;
-  overflow-x: hidden;
+  overflow: hidden;
   white-space: nowrap;
   box-sizing: border-box;
-  border-radius: .5rem;
-} 
-
-.calculator__buttons {
-  display: flex;
-  flex-wrap: wrap;
+  border-radius: 0.5rem;
+  box-shadow: inset -5px 10px 15px -7px #000000a8;
 }
 
-.calculator__buttons > .btn {
-  margin: .4rem;
-  flex-basis: calc(25% - .8rem); 
-  box-sizing: border-box;
+.calculator__buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
 }
 
 .calculator__procedure {
   font-size: 2.4rem;
+  border-right: 2px solid #008fb3;
+  padding-left: 5px;
+  animation: blink 0.9s infinite linear;
+}
+
+@keyframes blink {
+  20% {
+    border-right: 2px solid #008fb3;
+  }
+  50% {
+    border-right: 2px solid #008fb300;
+  }
+  100% {
+    border-right: 2px solid #008fb3;
+  }
 }
 
 @media only screen and (max-height: 320px) {
   .calculator__buttons > .btn {
-    padding: .1rem 0;
+    padding: 0.1rem 0;
   }
 }
 
 @media only screen and (max-width: 767px) {
+  .calculator {
+    padding: 1rem .5rem;
+    gap: .5rem
+  }
+
   .calculator__display {
     height: 3rem;
     padding-right: .4rem;
   }
 
+  .calculator__buttons {
+    gap: 2px;
+  }
+
   .calculator__buttons > .btn {
     font-size: 1.4rem;
-    margin: .2rem;
-    flex-basis: calc(25% - .4rem);
+    margin: 0.2rem;
   }
-  
+
   .calculator__procedure {
     font-size: 1.5rem;
   }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .calculator {
+    padding: 1rem;
+    gap: 1rem
+  }
+
   .calculator__display {
     height: 4rem;
   }
@@ -85,7 +114,7 @@ h1, p {
   .calculator__buttons > .btn {
     font-size: 1.8rem;
   }
-  
+
   .calculator__procedure {
     font-size: 2rem;
   }
