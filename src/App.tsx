@@ -13,8 +13,8 @@ function App() {
   const operatorsCheck = /[+\-×÷]/g;
   const [procedure, setProcedure] = useState("");
 
-  const parenthesesCount = (op: Parentheses) => {
-    const characters = procedure.split("");
+  const parenthesesCount = (op: Parentheses, text: string) => {
+    const characters = text.split("");
     return op === Parentheses.Open
       ? characters.filter(character => character === "(").length 
       : characters.filter(character => character === ")").length;
@@ -23,9 +23,6 @@ function App() {
   const verifyBtn = (btn: string) => {
     if (((procedure === "" || procedure === undefined) && btn === "=") || procedure === "Error") return "";
 
-    const lastCharacter = procedure[procedure.length - 1]
-    const separatedNumbers = procedure.split(operatorsCheck);
-    
     if (["C", "⌦", "="].includes(btn)) {
       switch(btn) {
         case "C":
@@ -33,17 +30,28 @@ function App() {
         case "⌦":
           return procedure.slice(0, -1);
         case "=":
-          const calculation = evaluate(procedure.replace(/×/g, "*").replace(/÷/g, "/"));
-          return calculation === Infinity || isNaN(calculation)
-            ? "Error"
-            : calculation.toString();
+          let adjustedProcedure: string = procedure.replace(/[\(-]+$/, '')
+          adjustedProcedure += ")".repeat(
+            parenthesesCount(Parentheses.Open, adjustedProcedure) - 
+            parenthesesCount(Parentheses.Closed, adjustedProcedure)
+          );
+          const calculation = evaluate(adjustedProcedure.replace(/×/g, "*").replace(/÷/g, "/"));
+          
+          return Number.isFinite(calculation)
+            ? calculation.toString() 
+            : "Error";
         default:
           return procedure
       }
     } else {
+      const lastCharacter = procedure[procedure.length - 1]
+      const separatedNumbers = procedure.split(operatorsCheck);
+      const parenthesesOpen = parenthesesCount(Parentheses.Open, procedure);
+      const parenthesesClosed = parenthesesCount(Parentheses.Closed, procedure);
+
       if (
-        (operators.includes(lastCharacter) && btn === "(") || 
-        ((!operators.includes(lastCharacter) && btn === ")") && (parenthesesCount(Parentheses.Open) !== parenthesesCount(Parentheses.Closed) && lastCharacter !== "("))
+        (operators.includes(lastCharacter) && btn === "(" || numbers.includes(lastCharacter) && btn == "(" || lastCharacter == "(" && btn == "(" || lastCharacter == undefined && btn == "(" || lastCharacter == ")" && btn == "(") || 
+        ((!operators.includes(lastCharacter) && btn === ")") && (parenthesesOpen !== parenthesesClosed && lastCharacter !== "("))
       ) {
         return procedure + btn
       } else if (
@@ -60,7 +68,7 @@ function App() {
         return procedure
       } else if (
         (!numbers.includes(lastCharacter) && !numbers.includes(btn)) || 
-        (numbers.includes(lastCharacter) && (btn === "(" || btn === ")") && parenthesesCount(Parentheses.Open) === parenthesesCount(Parentheses.Closed))
+        (numbers.includes(lastCharacter) && (btn === "(" || btn === ")") && parenthesesOpen === parenthesesClosed)
       ) {
         return procedure
       } else if (separatedNumbers[separatedNumbers.length-1].includes(".") && btn === "."){
@@ -72,26 +80,26 @@ function App() {
   };
 
   const buttons = [
-      { class: 'btn--light_grey', text: '(' },
-      { class: 'btn--light_grey', text: ')' },
-      { class: 'btn--light_grey btn__text--red', text: 'C' },
-      { class: 'btn--light_grey btn--rotate', text: '⌦' },
-      { class: 'btn--dark_grey', text: '7' },
-      { class: 'btn--dark_grey', text: '8' },
-      { class: 'btn--dark_grey', text: '9' },
-      { class: 'btn--light_grey', text: '÷' },
-      { class: 'btn--dark_grey', text: '4' },
-      { class: 'btn--dark_grey', text: '5' },
-      { class: 'btn--dark_grey', text: '6' },
-      { class: 'btn--light_grey', text: '×' },
-      { class: 'btn--dark_grey', text: '1' },
-      { class: 'btn--dark_grey', text: '2' },
-      { class: 'btn--dark_grey', text: '3' },
-      { class: 'btn--light_grey', text: '-' },
-      { class: 'btn--dark_grey', text: '0' },
-      { class: 'btn--dark_grey', text: '.' },
-      { class: 'btn--blue', text: '=' },
-      { class: 'btn--light_grey', text: '+' } 
+    { class: 'btn--dark', text: '(' },
+    { class: 'btn--dark', text: ')' },
+    { class: 'btn--dark btn--rotate', text: '⌦' },
+    { class: 'btn--dark', text: '÷' },
+    { class: 'btn--light', text: '7' },
+    { class: 'btn--light', text: '8' },
+    { class: 'btn--light', text: '9' },
+    { class: 'btn--dark', text: '×' },
+    { class: 'btn--light', text: '4' },
+    { class: 'btn--light', text: '5' },
+    { class: 'btn--light', text: '6' },
+    { class: 'btn--dark', text: '-' },
+    { class: 'btn--light', text: '1' },
+    { class: 'btn--light', text: '2' },
+    { class: 'btn--light', text: '3' },
+    { class: 'btn--dark', text: '+' }, 
+    { class: 'btn--light', text: '.' },
+    { class: 'btn--light', text: '0' },
+    { class: 'btn--light btn__text--red', text: 'C' },
+    { class: 'btn--blue', text: '=' }
   ];
 
   return (

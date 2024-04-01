@@ -4,8 +4,14 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #213547;
+  background-color: #ffffff;
+
+  --borderCalculator: solid 3px #008fb3;
+  --borderButtons: solid 2px #05a0c7d3;
+  --backgroundColorDark: #bfbfbf;
+  --backgroundColorLight: #e6e6e6;
+  --brightnessButton: 90%;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,12 +19,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
+    color: #ffffff;
+    background-color: #333333;
+
+    --borderCalculator: solid 3px white;
+    --borderButtons: solid .1px white;
+    --colorButtonDark: #488324;
+    --backgroundColorDark: #161616;
+    --backgroundColorLight: #16161696;
+    --brightnessButton: 200%;
+    --brightnessButtonBlue: 120%
   }
 }

@@ -16,9 +16,11 @@ h1, p {
 }
 
 .calculator {
-  border: .2rem solid black;
+  border: var(--borderCalculator);
   border-radius: 1rem;
   padding: .6rem;
+  width: 90%;
+  max-width: 500px
 }
 
 .calculator__display {
@@ -26,15 +28,15 @@ h1, p {
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
-  margin: 0 .2rem;
+  margin: 0 .4rem;
   padding-right: 1rem;
-  border: 2px solid #008fb3;
+  border: var(--borderCalculator);
   margin-bottom: .5rem;
   height: 6rem;
-  overflow: hidden;
+  overflow-x: hidden;
   white-space: nowrap;
   box-sizing: border-box;
-  max-width: 49.8em;
+  border-radius: .5rem;
 } 
 
 .calculator__buttons {
@@ -43,48 +45,48 @@ h1, p {
 }
 
 .calculator__buttons > .btn {
-  margin: .2rem;
-  flex-basis: calc(25% - .4rem); 
+  margin: .4rem;
+  flex-basis: calc(25% - .8rem); 
   box-sizing: border-box;
 }
 
 .calculator__procedure {
-  font-size: 3rem;
+  font-size: 2.4rem;
+}
+
+@media only screen and (max-height: 320px) {
+  .calculator__buttons > .btn {
+    padding: .1rem 0;
+  }
 }
 
 @media only screen and (max-width: 767px) {
-  .calculator {
-      width: 90%;
-  }
-
   .calculator__display {
-      height: 3rem;
-      padding-right: .4rem;
+    height: 3rem;
+    padding-right: .4rem;
   }
 
   .calculator__buttons > .btn {
-      font-size: 1.4rem;
+    font-size: 1.4rem;
+    margin: .2rem;
+    flex-basis: calc(25% - .4rem);
   }
   
   .calculator__procedure {
-      font-size: 1.5rem;
+    font-size: 1.5rem;
   }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
-  .calculator {
-      max-width: 725px;
-  }
-
   .calculator__display {
-      height: 4rem;
+    height: 4rem;
   }
 
   .calculator__buttons > .btn {
-      font-size: 1.8rem;
+    font-size: 1.8rem;
   }
   
   .calculator__procedure {
-      font-size: 2rem;
+    font-size: 2rem;
   }
 }

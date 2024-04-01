@@ -1,24 +1,39 @@
 .btn {
   font-size: 2rem;
   cursor: pointer;
+  border: var(--borderButtons);
+  padding: .5rem 0;
+  border-radius: 5rem;
+}
+
+.btn {
+  outline: none;
+}
+
+.btn:hover {
+  filter: brightness(var(--brightnessButton));
+}
+
+.btn--blue:hover {
+  filter: brightness(var(--brightnessButtonBlue));
 }
 
 .btn__text--red {
   color: #e74c3c;
   font-weight: bold;
-  text-shadow: 0 .5px 1.2px #000;
 }
 
 .btn--rotate {
   transform: rotate(180deg);
 }
 
-.btn--dark_grey {
-  background-color: #bfbfbf;
+.btn--dark {
+  color: var(--colorButtonDark);
+  background-color: var(--backgroundColorDark);
 }
 
-.btn--light_grey {
-  background-color: #e6e6e6
+.btn--light {
+  background-color: var(--backgroundColorLight)
 }
 
 .btn--blue {
